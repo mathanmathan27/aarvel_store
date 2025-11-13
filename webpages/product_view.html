@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Raw Nendran Banana Powder - Aarvel</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='product_style.css') }}"
+    />
+  </head>
+
+  <body>
+    <div class="overlay"></div>
+
+    <!-- Header -->
+    <header>
+      <img
+        src="{{ url_for('static', filename='logo2.png') }}"
+        alt="Aarvel Logo"
+        class="logo"
+      />
+      <h1>Raw Nendran Banana Powder</h1>
+      <h2>Aarvel — The Trusted Selections</h2>
+    </header>
+
+    <!-- Product Details -->
+    <main>
+      <section class="leaf-card">
+        <h3>About Product</h3>
+        <p>
+          Made from 100% natural, unripe Nendran bananas, finely milled to
+          retain nutrients and purity. A natural source of resistant starch and
+          healthy energy.
+        </p>
+      </section>
+
+      <section class="leaf-card">
+        <h3>Key Features</h3>
+        <ul>
+          <li>Rich in resistant starch</li>
+          <li>Naturally gluten-free</li>
+          <li>Supports digestive and bone health</li>
+          <li>100% natural and preservative-free</li>
+        </ul>
+      </section>
+
+      <section class="leaf-card">
+        <h3>How to Use</h3>
+        <p>
+          <b>For babies:</b> Make porridge with 2 tablespoons of powder and 1
+          cup of water. Cook for 10 minutes.
+        </p>
+        <p>
+          <b>For adults:</b> Mix 1-2 scoops with milk/water for a drink, or add
+          to smoothies, porridges, or pancakes.
+        </p>
+      </section>
+
+      <section class="leaf-card">
+        <h3>Product Specifications</h3>
+        <ul>
+          <li>Net Weight: 250 g – ₹350</li>
+          <li>Net Weight: 500 g – ₹700</li>
+          <li>Mfg Date: [Insert Date]</li>
+        </ul>
+      </section>
+<div class="button-container">
+  <button class="buy-btn" onclick="openModal()">Buy Now</button>
+</div>
+
+<!-- Quantity Selection Modal -->
+<div id="buyModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h3>Select Product Quantity</h3>
+
+    <label>
+      <input type="radio" name="size" value="250" checked />
+      250g — ₹350
+    </label>
+    <br />
+    <label>
+      <input type="radio" name="size" value="500" />
+      500g — ₹700
+    </label>
+    <br /><br />
+    <button class="confirm-btn" onclick="confirmSelection()">Pay Now</button>
+  </div>
+</div>
+
+<script>
+  function openModal() {
+    document.getElementById("buyModal").style.display = "block";
+  }
+
+  function closeModal() {
+    document.getElementById("buyModal").style.display = "none";
+  }
+
+  function confirmSelection() {
+    const selectedOption = document.querySelector('input[name="size"]:checked').value;
+
+    let amount = 0;
+    let label = "";
+    if (selectedOption === "250") {
+      amount = 350;
+      label = "Raw Nendran Banana Powder (250g)";
+    } else {
+      amount = 700;
+      label = "Raw Nendran Banana Powder (500g)";
+    }
+
+    // 🟢 Replace with your actual UPI ID (merchant or personal)
+    const upiID = "mathanvelusamy955@okicici";
+
+    // Create UPI payment link
+    const upiLink = `upi://pay?pa=${upiID}&pn=Aarvel&am=${amount}&cu=INR&tn=${encodeURIComponent(label)}`;
+
+    // Open UPI payment
+    window.location.href = upiLink;
+
+    closeModal();
+  }
+</script>
+
+
+    </main>
+  </body>
+</html>
