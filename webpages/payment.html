@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Complete Payment</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #e8ffe8;
+        padding: 40px;
+        text-align: center;
+      }
+
+      .box {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        width: 350px;
+        margin: auto;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      }
+
+      h2 {
+        color: #0b6e0b;
+        margin-bottom: 20px;
+      }
+
+      .pay-btn {
+        display: inline-block;
+        background: #098e0a;
+        color: white;
+        padding: 12px 25px;
+        text-decoration: none;
+        font-size: 18px;
+        border-radius: 8px;
+        margin-top: 20px;
+        font-weight: bold;
+      }
+
+      .success-btn {
+        display: inline-block;
+        background: #004aad;
+        color: white;
+        padding: 12px 25px;
+        text-decoration: none;
+        font-size: 18px;
+        border-radius: 8px;
+        margin-top: 20px;
+        font-weight: bold;
+      }
+
+      .info {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <h2>Complete Your Payment</h2>
+
+      <p class="info">Customer: <b>{{ name }}</b></p>
+      <p class="info">Product: <b>{{ quantity }}</b></p>
+      <p class="info">Amount to Pay: <b>₹{{ price }}</b></p>
+
+      <!-- PAY NOW BUTTON → Opens your UPI app -->
+      <a
+        href="upi://pay?pa=mathanvelusamy955@okicici&pn=Aarvel%20Store&am={{ price }}&cu=INR"
+        class="pay-btn"
+      >
+        Pay Now
+      </a>
+
+      <br /><br />
+
+      <!-- CUSTOMER CONFIRMS PAYMENT -->
+      <a href="/payment_success" class="success-btn"> I Have Paid </a>
+    </div>
+  </body>
+</html>
