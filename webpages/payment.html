@@ -1,82 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Complete Payment</title>
-
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background: #e8ffe8;
-        padding: 40px;
-        text-align: center;
-      }
-
-      .box {
-        background: white;
-        padding: 30px;
-        border-radius: 15px;
-        width: 350px;
-        margin: auto;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-      }
-
-      h2 {
-        color: #0b6e0b;
-        margin-bottom: 20px;
-      }
-
-      .pay-btn {
-        display: inline-block;
-        background: #098e0a;
-        color: white;
-        padding: 12px 25px;
-        text-decoration: none;
-        font-size: 18px;
-        border-radius: 8px;
-        margin-top: 20px;
-        font-weight: bold;
-      }
-
-      .success-btn {
-        display: inline-block;
-        background: #004aad;
-        color: white;
-        padding: 12px 25px;
-        text-decoration: none;
-        font-size: 18px;
-        border-radius: 8px;
-        margin-top: 20px;
-        font-weight: bold;
-      }
-
-      .info {
-        font-size: 18px;
-        margin-bottom: 10px;
-      }
-    </style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pay - Aarvel</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='product_style.css') }}"
+    />
   </head>
+
   <body>
-    <div class="box">
-      <h2>Complete Your Payment</h2>
+    <form action="/verify_payment" method="post">
+      <label>Enter UPI Transaction ID:</label>
+      <input
+        type="text"
+        name="txn_id"
+        required
+        placeholder="Example: T202511221234"
+      />
+      <button type="submit">I Have Paid</button>
+    </form>
 
-      <p class="info">Customer: <b>{{ name }}</b></p>
-      <p class="info">Product: <b>{{ quantity }}</b></p>
-      <p class="info">Amount to Pay: <b>₹{{ price }}</b></p>
+    <div class="checkout-container">
+      <h1>Complete Payment</h1>
 
-      <!-- PAY NOW BUTTON → Opens your UPI app -->
-      <a
-        href="upi://pay?pa=mathanvelusamy955@okicici&pn=Aarvel%20Store&am={{ price }}&cu=INR"
-        class="pay-btn"
+      <div class="summary-box">
+        <p><strong>Order ID:</strong> {{ order_id }}</p>
+        <p><strong>Name:</strong> {{ name }}</p>
+        <p><strong>Product:</strong> {{ product_name }}</p>
+        <p><strong>Quantity:</strong> {{ quantity }}</p>
+        <p><strong>Amount:</strong> ₹{{ price }}</p>
+      </div>
+
+      <p style="text-align: center; margin-top: 20px">
+        <a
+          class="pay-btn"
+          id="upiLink"
+          href="upi://pay?pa=mathanvelusamy955@okicici&pn=Aarvel&am={{ price }}&cu=INR&tn=Order%20{{ order_id }}"
+        >
+          Open UPI App to Pay ₹{{ price }}
+        </a>
+      </p>
+
+      <!-- Android UPI Status Handler -->
+      <script>
+        // After returning from UPI app
+        window.onload = function () {
+          const urlParams = new URLSearchParams(window.location.search);
+          if (urlParams.has("Status")) {
+            const status = urlParams.get("Status").toUpperCase();
+            fetch("/upi_callback", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                order_id: "{{ order_id }}",
+                status: status,
+              }),
+            }).then(() => {
+              window.location.href = "/payment_result?order_id={{ order_id }}";
+            });
+          }
+        };
+      </script>
+
+      <p style="text-align: center; margin-top: 20px">
+        <b>If UPI does not return automatically, click below:</b>
+      </p>
+
+      <!-- Manual button for iPhone -->
+      <form
+        method="POST"
+        action="/manual_paid"
+        enctype="multipart/form-data"
+        style="text-align: center; margin-top: 10px"
       >
-        Pay Now
-      </a>
+        <input type="hidden" name="order_id" value="{{ order_id }}" />
+        <label>Upload Payment Screenshot (iPhone Required):</label><br /><br />
+        <input
+          type="file"
+          name="screenshot"
+          accept="image/*"
+          required
+        /><br /><br />
 
-      <br /><br />
-
-      <!-- CUSTOMER CONFIRMS PAYMENT -->
-      <a href="/payment_success" class="success-btn"> I Have Paid </a>
+        <button type="submit" class="pay-btn" style="background: #2f7a35">
+          I Have Paid (Upload Proof)
+        </button>
+      </form>
     </div>
   </body>
 </html>

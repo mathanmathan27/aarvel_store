@@ -1,98 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Checkout - Aarvel</title>
 
-    <style>
-      body {
-        background: #f2fff2;
-        font-family: Arial, sans-serif;
-        padding: 20px;
-      }
-
-      .container {
-        background: white;
-        max-width: 500px;
-        margin: auto;
-        padding: 25px;
-        border-radius: 12px;
-        border: 3px solid #2d7a32;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-      }
-
-      h2 {
-        text-align: center;
-        color: #2d7a32;
-        font-size: 26px;
-        margin-bottom: 20px;
-      }
-
-      label {
-        font-weight: bold;
-        color: #1b421e;
-      }
-
-      input,
-      select {
-        width: 100%;
-        padding: 12px;
-        margin-top: 5px;
-        margin-bottom: 15px;
-        border: 2px solid #2d7a32;
-        border-radius: 8px;
-        font-size: 16px;
-      }
-
-      button {
-        width: 100%;
-        padding: 15px;
-        background: #2d7a32;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        font-size: 18px;
-        cursor: pointer;
-        font-weight: bold;
-      }
-
-      button:hover {
-        background: #236127;
-      }
-    </style>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='product_style.css') }}"
+    />
   </head>
 
   <body>
-    <div class="container">
-      <h2>Customer Details</h2>
+    <div class="checkout-container">
+      <h1>Checkout</h1>
 
-      <form action="/submit_address" method="POST">
-        <label>Name</label>
-        <input type="text" name="name" required />
+      <div class="summary-box">
+        <h2>Order Summary</h2>
 
-        <label>Phone</label>
-        <input type="text" name="phone" required />
+        <p>
+          <strong>Product:</strong> {{ label or 'Raw Nendran Banana Powder' }}
+        </p>
+        <p>
+          <strong>Quantity:</strong> {{ '250g' if size == '250' else '500g' }}
+        </p>
+        <p><strong>Amount:</strong> ₹{{ price }}</p>
+      </div>
 
-        <label>Street</label>
-        <input type="text" name="street" required />
+      <!-- ⭐ FIXED FORM — all values NOW inside -->
+      <form method="POST" action="/submit_order" class="checkout-form">
+        <!-- Hidden important values -->
+        <input type="hidden" name="size" value="{{ size }}" />
+        <input
+          type="hidden"
+          name="quantity"
+          value="{{ '250g' if size=='250' else '500g' }}"
+        />
+        <input type="hidden" name="price" value="{{ price }}" />
 
-        <label>City</label>
-        <input type="text" name="city" required />
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" name="name" required />
+        </div>
 
-        <label>State</label>
-        <input type="text" name="state" required />
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="tel" name="phone" required />
+        </div>
 
-        <label>Pincode</label>
-        <input type="text" name="pincode" required />
+        <div class="form-group">
+          <label>Street</label>
+          <input type="text" name="street" required />
+        </div>
 
-        <label>Select Quantity</label>
-        <select name="quantity" required>
-          <option value="250g">250g – ₹350</option>
-          <option value="500g">500g – ₹700</option>
-        </select>
+        <div class="form-row">
+          <div class="form-group small">
+            <label>City</label>
+            <input type="text" name="city" required />
+          </div>
 
-        <button type="submit">Proceed to Payment</button>
+          <div class="form-group small">
+            <label>State</label>
+            <input type="text" name="state" required />
+          </div>
+
+          <div class="form-group small">
+            <label>Pincode</label>
+            <input type="text" name="pincode" required />
+          </div>
+        </div>
+
+        <button type="submit" class="pay-btn">Pay Now ₹{{ price }}</button>
       </form>
     </div>
   </body>

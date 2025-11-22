@@ -1,292 +1,269 @@
-/* 🌿 Global Styling */
+/* ===========================
+   GLOBAL
+=========================== */
 body {
   margin: 0;
-  font-family: "Poppins", sans-serif;
-  color: #000;
-  background: #eaf4e0;
-  overflow-x: hidden;
-}
+  font-family: Arial, sans-serif;
 
-/* 🍌 Background Image */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  /* background image */
   background: url("banana.png") no-repeat center center fixed;
   background-size: cover;
-  filter: brightness(0.8) saturate(1.3);
-  z-index: -2;
 }
 
-body::after {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
+/* ===========================
+   REALISTIC BANANA LEAF HEADER
+=========================== */
+.banana-leaf-header {
   width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.1);
-  z-index: -1;
-}
-
-/* 🌱 Header Section */
-/* 🌿 Header Section */
-header {
   text-align: center;
-  padding: 30px 15px;
+  padding: 35px 20px;
+
   background: linear-gradient(
     180deg,
-    rgba(24, 124, 4, 0.95) 0%,
-    rgba(130, 200, 106, 0.95) 100%
+    #18c92f 0%,
+    #0fa728 40%,
+    #0b7f1f 70%,
+    #075e16 100%
   );
 
-  border-bottom: 4px solid #2e7d32;
-  box-shadow: 0 3px 20px rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(3px);
-  border-radius: 0 0 40px 40px;
+  border-radius: 0 0 25px 25px;
+  position: relative;
+  color: black;
+  font-weight: bold;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.25);
 }
 
-.logo {
-  width: 120px;
-  height: auto;
-  display: block;
-  margin: 0 auto 10px;
+.banana-logo {
+  width: 110px;
+  margin-bottom: 15px;
 }
 
-header h1 {
-  font-size: 2rem;
-  color: #000;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+.banana-leaf-header h1,
+.banana-leaf-header h2 {
+  margin: 5px 0;
+  font-weight: 900;
+  color: black;
 }
 
-header h2 {
-  font-size: 1.1rem;
-  color: #000;
-  font-weight: 500;
+/* ===========================
+   MAIN CONTENT
+=========================== */
+main {
+  padding: 20px;
+  margin-top: 25px;
 }
 
-/* 🍃 Realistic Banana Leaf Cards */
+/* ===========================
+   BANANA LEAF STYLE PRODUCT CARDS
+=========================== */
 .leaf-card {
-  background: linear-gradient(
-      145deg,
-      rgba(188, 230, 174, 0.95) 0%,
-      rgba(156, 219, 133, 0.95) 40%,
-      rgba(130, 200, 106, 0.95) 100%
-    ),
-    repeating-linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.1) 0px,
-      rgba(255, 255, 255, 0.1) 2px,
-      rgba(0, 0, 0, 0.05) 4px,
-      rgba(0, 0, 0, 0.05) 6px
-    );
-  border: 5px solid #2e7d32;
-  border-radius: 60px 60px 90px 90px / 40px 40px 70px 70px;
-  margin: 50px auto;
-  max-width: 850px;
-  padding: 50px 40px;
-  color: #000;
-  text-align: left;
-  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(135deg, #0f8018 0%, #16a021 40%, #1db82a 100%);
+
+  padding: 22px;
+  margin-bottom: 25px;
+
+  border-left: 10px solid #0a5f12;
+  border-radius: 16px;
   position: relative;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.2);
 }
 
-/* Add realistic leaf veins */
-.leaf-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 2px;
-  height: 100%;
-  background: rgba(46, 125, 50, 0.4);
-  transform: translateX(-50%);
-  z-index: 0;
-}
-
-.leaf-card::after {
+/* glossy highlight */
+.leaf-card .gloss {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
   height: 100%;
-  background: repeating-linear-gradient(
-    120deg,
-    rgba(255, 255, 255, 0.05) 0px,
-    rgba(255, 255, 255, 0.05) 2px,
-    rgba(0, 0, 0, 0.05) 3px,
-    rgba(0, 0, 0, 0.05) 5px
+  width: 100%;
+
+  background: linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0.28),
+    rgba(255, 255, 255, 0.06) 45%,
+    transparent 70%
   );
-  opacity: 0.6;
+
+  pointer-events: none;
   z-index: 0;
 }
 
-/* Hover Animation */
-.leaf-card:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45);
-  border-color: #1b5e20;
-}
-
-/* Text Inside Leaf */
+/* STRONG BLACK TITLES (like top header) */
 .leaf-card h3 {
-  color: #000;
-  font-size: 1.8rem;
-  font-weight: 600;
-  margin-bottom: 15px;
-  border-bottom: 3px solid #1b5e20;
-  display: inline-block;
-  padding-bottom: 5px;
-  z-index: 2;
+  margin-top: 0;
+  font-size: 22px;
+  font-weight: 900;
+  color: #000000 !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
   position: relative;
+  z-index: 2;
 }
 
+/* White for normal text */
 .leaf-card p,
 .leaf-card li {
-  color: #000;
-  font-size: 1.1rem;
-  line-height: 1.7;
+  color: white;
   position: relative;
   z-index: 2;
 }
 
-.leaf-card ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-.leaf-card li::before {
-  content: "🍃 ";
-}
-
-/* 🌿 Buy Button */
+/* ===========================
+   BUY BUTTON
+=========================== */
 .button-container {
   text-align: center;
-  margin: 40px 0 70px 0;
+  margin-top: 30px;
 }
 
 .buy-btn {
-  background-color: #2e7d32;
+  background-color: #3fa447;
   color: white;
+  padding: 15px 30px;
+  font-size: 18px;
   border: none;
-  border-radius: 12px;
-  padding: 15px 45px;
-  font-size: 1.2rem;
+  border-radius: 10px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: 0.3s ease;
 }
 
 .buy-btn:hover {
-  background-color: #1b5e20;
-  transform: scale(1.05);
+  background-color: #348c3c;
 }
-/* Modal background */
+
+/* ===========================
+   MODAL BOX
+=========================== */
 .modal {
-  display: none;
   position: fixed;
-  z-index: 1000;
-  left: 0;
   top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 50, 0, 0.6);
-  justify-content: center;
-  align-items: center;
-}
-
-/* Modal box */
-.modal-content {
-  background: #f5fff5;
-  padding: 25px;
-  border: 3px solid #2e7d32;
-  border-radius: 20px;
-  width: 300px;
-  margin: auto;
-  text-align: center;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  font-family: 'Poppins', sans-serif;
-}
-
-/* Close (X) */
-.close {
-  float: right;
-  font-size: 22px;
-  font-weight: bold;
-  cursor: pointer;
-  color: #2e7d32;
-}
-
-/* Confirm button */
-.confirm-btn {
-  background-color: #2e7d32;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: 0.3s ease;
-}
-
-.confirm-btn:hover {
-  background-color: #1b5e20;
-  transform: scale(1.05);
-}
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 50, 0, 0.6);
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .modal-content {
-  background: #f5fff5;
+  background: white;
   padding: 25px;
-  border: 3px solid #2e7d32;
-  border-radius: 20px;
   width: 300px;
-  margin: auto;
+  border-radius: 12px;
   text-align: center;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  font-family: "Poppins", sans-serif;
 }
 
 .close {
   float: right;
-  font-size: 22px;
+  font-size: 24px;
   font-weight: bold;
   cursor: pointer;
-  color: #2e7d32;
 }
 
 .confirm-btn {
-  background-color: #2e7d32;
+  background-color: #3fa447;
   color: white;
+  padding: 10px 22px;
   border: none;
-  border-radius: 10px;
-  padding: 10px 20px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 1rem;
-  transition: 0.3s ease;
+  font-size: 17px;
+  margin-top: 10px;
 }
 
 .confirm-btn:hover {
-  background-color: #1b5e20;
-  transform: scale(1.05);
+  background-color: #2f7a35;
 }
 
+/* ===========================
+   MOBILE VIEW
+=========================== */
+@media (max-width: 600px) {
+  .banana-logo {
+    width: 90px;
+  }
+  .leaf-card {
+    padding: 15px;
+  }
+  .buy-btn {
+    width: 90%;
+  }
+}
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: url("banana.png") no-repeat center center fixed;
+  background-size: cover;
+}
 
+.checkout-container {
+  width: 60%;
+  margin: 30px auto;
+  background: rgba(255, 255, 255, 0.88);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+  margin-bottom: 10px;
+  font-size: 32px;
+}
+
+.summary-box {
+  background: #f9f9f9;
+  padding: 20px;
+  border-left: 5px solid #4caf50;
+  margin-bottom: 25px;
+}
+
+.checkout-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-row {
+  display: flex;
+  gap: 15px;
+}
+
+.form-group.small {
+  flex: 1;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #aaa;
+  font-size: 15px;
+  width: 100%;
+}
+
+.pay-btn {
+  margin-top: 15px;
+  padding: 15px;
+  font-size: 18px;
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.pay-btn:hover {
+  background: #3e8e41;
+}
