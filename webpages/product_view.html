@@ -4,21 +4,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Raw Nendran Banana Powder - Aarvel</title>
-
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='product_style.css') }}"
     />
   </head>
-
   <body
-    style="
-    background: url('{{ url_for('static', filename='banana.png') }}') no-repeat center top;
-    background-size: cover;
-    background-attachment: fixed;
-"
+    style="background: url('{{ url_for('static', filename='banana.png') }}') no-repeat center top;
+           background-size: cover; background-attachment: fixed;"
   >
-    <!-- 🌿 Banana Leaf Top Header -->
     <div class="banana-leaf-header">
       <img
         src="{{ url_for('static', filename='logo2.png') }}"
@@ -75,47 +69,10 @@
       </section>
 
       <div class="button-container">
-        <button class="buy-btn" onclick="openModal()">Buy Now</button>
-      </div>
-
-      <!-- Quantity Modal -->
-      <div id="buyModal" class="modal" style="display: none">
-        <div class="modal-content">
-          <span class="close" onclick="closeModal()">&times;</span>
-
-          <h3>Select Product Quantity</h3>
-
-          <label
-            ><input type="radio" name="size" value="250" checked /> 250g —
-            ₹350</label
-          ><br />
-          <label
-            ><input type="radio" name="size" value="500" /> 500g — ₹700</label
-          >
-
-          <button class="confirm-btn" onclick="goToCheckout()">Pay Now</button>
-        </div>
+        <a href="{{ url_for('buy_product', product_id=1) }}" class="buy-btn"
+          >Buy Now</a
+        >
       </div>
     </main>
-
-    <script>
-      function openModal() {
-        document.getElementById("buyModal").style.display = "flex";
-      }
-      function closeModal() {
-        document.getElementById("buyModal").style.display = "none";
-      }
-      function goToCheckout() {
-        const sel = document.querySelector('input[name="size"]:checked').value;
-        const price = sel === "250" ? 350 : 700;
-        const label =
-          sel === "250"
-            ? "Raw Nendran Banana Powder (250g)"
-            : "Raw Nendran Banana Powder (500g)";
-        window.location.href = `/checkout?size=${sel}&price=${price}&label=${encodeURIComponent(
-          label
-        )}`;
-      }
-    </script>
   </body>
 </html>

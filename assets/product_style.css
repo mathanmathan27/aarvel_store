@@ -4,8 +4,6 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-
-  /* background image */
   background: url("banana.png") no-repeat center center fixed;
   background-size: cover;
 }
@@ -17,7 +15,6 @@ body {
   width: 100%;
   text-align: center;
   padding: 35px 20px;
-
   background: linear-gradient(
     180deg,
     #18c92f 0%,
@@ -25,7 +22,6 @@ body {
     #0b7f1f 70%,
     #075e16 100%
   );
-
   border-radius: 0 0 25px 25px;
   position: relative;
   color: black;
@@ -58,50 +54,33 @@ main {
 =========================== */
 .leaf-card {
   background: linear-gradient(135deg, #0f8018 0%, #16a021 40%, #1db82a 100%);
-
   padding: 22px;
   margin-bottom: 25px;
-
   border-left: 10px solid #0a5f12;
   border-radius: 16px;
   position: relative;
   overflow: hidden;
-
   box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.2);
+  color: white; /* content text remains white */
 }
 
-/* glossy highlight */
+/* Remove glossy overlay */
 .leaf-card .gloss {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-
-  background: linear-gradient(
-    115deg,
-    rgba(255, 255, 255, 0.28),
-    rgba(255, 255, 255, 0.06) 45%,
-    transparent 70%
-  );
-
-  pointer-events: none;
-  z-index: 0;
+  display: none;
 }
 
-/* STRONG BLACK TITLES (like top header) */
+/* Bold black titles only */
 .leaf-card h3 {
   margin-top: 0;
   font-size: 22px;
   font-weight: 900;
-  color: #000000 !important;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+  color: #000000; /* heading color black */
+  text-shadow: none;
   position: relative;
   z-index: 2;
 }
 
-/* White for normal text */
+/* Keep content (paragraphs & list items) in white */
 .leaf-card p,
 .leaf-card li {
   color: white;
@@ -191,13 +170,10 @@ main {
     width: 90%;
   }
 }
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: url("banana.png") no-repeat center center fixed;
-  background-size: cover;
-}
 
+/* ===========================
+   CHECKOUT PAGE
+=========================== */
 .checkout-container {
   width: 60%;
   margin: 30px auto;

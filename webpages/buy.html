@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Buy {{ product.name }}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='product_style.css') }}"
+    />
+    <style>
+      body {
+        background: url("{{ url_for("static", filename="banana.png") }}")
+          no-repeat center top;
+        background-size: cover;
+        background-attachment: fixed;
+        font-family: Arial, sans-serif;
+      }
+
+      .buy-container {
+        max-width: 400px;
+        margin: 80px auto;
+        padding: 30px 20px;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        text-align: center;
+      }
+
+      .buy-container h1 {
+        margin-bottom: 25px;
+        font-size: 26px;
+        color: #333;
+      }
+
+      .quantity-options {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 25px;
+      }
+
+      .quantity-options input[type="radio"] {
+        display: none;
+      }
+
+      .quantity-options label {
+        display: block;
+        padding: 15px;
+        border: 2px solid #3e8e41;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        background-color: #f0fdf4;
+        color: #333;
+      }
+
+      .quantity-options input[type="radio"]:checked + label {
+        background-color: #3e8e41;
+        color: #fff;
+        border-color: #367233;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      }
+
+      .buy-btn {
+        padding: 12px 25px;
+        background: #3e8e41;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 18px;
+        transition: background 0.3s ease;
+      }
+
+      .buy-btn:hover {
+        background: #367233;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="buy-container">
+      <h1>Buy {{ product.name }}</h1>
+      <form method="POST">
+        <h3>Select Quantity</h3>
+        <div class="quantity-options">
+          {% for size, price in product.prices.items() %}
+          <input
+            type="radio"
+            id="size{{ size }}"
+            name="size"
+            value="{{ size }}"
+            {%
+            if
+            loop.first
+            %}checked{%
+            endif
+            %}
+          />
+          <label for="size{{ size }}">{{ size }}g — ₹{{ price }}</label>
+          {% endfor %}
+        </div>
+        <button type="submit" class="buy-btn">Confirm Purchase</button>
+      </form>
+    </div>
+  </body>
+</html>
